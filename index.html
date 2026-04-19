@@ -5,23 +5,23 @@
 <title>Happy Birthday Henna ❤️</title>
 
 <style>
-body {
+body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
 background: linear-gradient(135deg,#ffdde1,#ee9ca7,#ffd1dc);
 overflow-x:hidden;
 cursor: url('cursor.cur') 16 16, auto;
-transition:0.5s;
+transition:0.4s;
 }
 
-/* 🌙 night mode */
-.dark {
+/* 🌙 dark mode */
+.dark{
 background: linear-gradient(135deg,#1e1e2f,#3a3a5a);
 color:white;
 }
 
 /* intro */
-#intro {
+#intro{
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
@@ -34,7 +34,7 @@ z-index:999;
 }
 
 /* main */
-.container {
+.container{
 max-width:850px;
 margin:60px auto;
 padding:25px;
@@ -46,35 +46,35 @@ display:none;
 }
 
 /* typing */
-#typing {
-white-space:pre-line;
+#typing{
 line-height:1.8;
+word-wrap:break-word;
 }
 
-/* 💌 polaroid photos */
-.gallery {
+/* polaroid */
+.gallery{
 display:flex;
 gap:15px;
 flex-wrap:wrap;
 justify-content:center;
 margin-top:20px;
 }
-.polaroid {
+.polaroid{
 background:white;
 padding:10px 10px 25px;
 border-radius:10px;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 transform:rotate(-2deg);
 }
-.polaroid img {
+.polaroid:nth-child(2){transform:rotate(2deg);}
+.polaroid:nth-child(3){transform:rotate(-1deg);}
+.polaroid img{
 width:150px;
 border-radius:5px;
 }
-.polaroid:nth-child(2){transform:rotate(2deg);}
-.polaroid:nth-child(3){transform:rotate(-1deg);}
 
 /* buttons */
-button {
+button{
 margin-top:10px;
 padding:10px 20px;
 border:none;
@@ -85,13 +85,13 @@ cursor:pointer;
 }
 
 /* hearts */
-@keyframes floatUp {
+@keyframes floatUp{
 0%{transform:translateY(0);opacity:1;}
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* 💬 floating texts */
-.float-text {
+/* floating text */
+.float-text{
 position:fixed;
 color:#ff4d6d;
 font-size:14px;
@@ -138,25 +138,34 @@ window.onload=function(){
 
 const message = `MY HZU,
 
-I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life, everything about you feels so unreal that sometimes i question that even if ur real or not, your love makes me feel the emotions i never knew existed...
+I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life, everything about you feels so unreal that sometimes i question that even if ur real or not, your love makes me feel the emotions i never knew existed, ik we both are very short tempered have flaws but the way we always try n make it up n all is obv that we are meant to be together, I promise ill be the best bf now and will act just as how you like, will never give u a chance to complain and be bad at me bs daikho aap ab
 
-I Love you and always will in this life and others as well...
+I Love you and always will in this life and others as well, if i could get chance to relive life i'd want you to be my gf in every. There is something about you that makes life livable, enjoyable, happy and most importantly makes life look different. I never knew someone could have this much impact on me but for 2 years we've met everything is just better man
 
 Im sorry for hurting you whenever i did and i promise ill makeup for everything 
 
 Forever yours,
 Ayandu ❤️`;
 
-/* ✨ typewriter */
+/* ✨ FIXED TYPEWRITER (NO ... BUG) */
 function typeWriter(){
 let i=0;
 let el=document.getElementById("typing");
-el.textContent="";
+el.innerHTML="";
+
 function step(){
-if(i<message.length){
-el.textContent += message.charAt(i);
+if(i < message.length){
+let char = message.charAt(i);
+
+/* handle line breaks */
+if(char === "\n"){
+el.innerHTML += "<br>";
+}else{
+el.innerHTML += char;
+}
+
 i++;
-setTimeout(step,12);
+setTimeout(step,15);
 }
 }
 step();
@@ -173,12 +182,12 @@ bgmusic.play();
 /* letter */
 letterBtn.onclick=typeWriter;
 
-/* 💌 secret */
+/* secret */
 playBtn.onclick=function(){
 secret.style.display="block";
 };
 
-/* 🎵 music control */
+/* music control */
 musicBtn.onclick=function(){
 if(bgmusic.paused){
 bgmusic.play();
@@ -189,12 +198,12 @@ musicBtn.innerText="Play Music 🎵";
 }
 };
 
-/* 🌙 mode toggle */
+/* dark mode */
 modeBtn.onclick=function(){
 document.body.classList.toggle("dark");
 };
 
-/* 💖 hearts */
+/* hearts */
 setInterval(()=>{
 let h=document.createElement("div");
 h.innerHTML="💖";
@@ -207,8 +216,8 @@ document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },400);
 
-/* 💬 floating cute texts */
-const texts=["I love you 💗","Forever us 💖","My favorite person 💕"];
+/* floating text */
+const texts=["I love you 💖","My girl 💕","Forever us 💞","Henna ❤️"];
 setInterval(()=>{
 let t=document.createElement("div");
 t.className="float-text";
