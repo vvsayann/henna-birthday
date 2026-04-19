@@ -10,12 +10,10 @@ margin: 0;
 font-family: 'Segoe UI', sans-serif;
 background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffd1dc);
 overflow-x: hidden;
-
-/* 🖱️ CUSTOM CURSOR */
 cursor: url('heart.png'), auto;
 }
 
-/* 🎁 INTRO */
+/* intro */
 #intro {
 position: fixed;
 top:0; left:0;
@@ -37,23 +35,15 @@ background:#ff4d6d;
 color:white;
 font-size:18px;
 cursor:pointer;
-margin-top:15px;
 }
 
-/* 💖 HEART FLOAT */
+/* hearts */
 @keyframes floatUp {
 0% {transform:translateY(0); opacity:1;}
 100% {transform:translateY(-110vh); opacity:0;}
 }
 
-/* ✨ SIDE BOX FLOAT */
-@keyframes sideFloat {
-0% {transform: translateY(0);}
-50% {transform: translateY(-10px);}
-100% {transform: translateY(0);}
-}
-
-/* 💗 MAIN */
+/* main */
 .container {
 max-width:850px;
 margin:60px auto;
@@ -80,13 +70,12 @@ grid-template-columns:repeat(3,1fr);
 gap:10px;
 margin-top:20px;
 }
-
 .gallery img {
 width:100%;
 border-radius:15px;
 }
 
-/* buttons */
+/* button */
 button {
 margin-top:20px;
 padding:12px 25px;
@@ -97,12 +86,9 @@ border-radius:25px;
 cursor:pointer;
 }
 
-#secret {
-display:none;
-margin-top:15px;
-}
+#secret { display:none; }
 
-/* 💗 SIDE BOXES */
+/* side boxes */
 .side-box {
 position: fixed;
 top: 30%;
@@ -112,23 +98,19 @@ background: rgba(255,255,255,0.6);
 border-radius: 20px;
 backdrop-filter: blur(10px);
 box-shadow: 0 5px 25px rgba(255,77,109,0.3);
-font-size: 14px;
 color: #ff3d6e;
-z-index: 2;
-
-/* animation */
-animation: sideFloat 4s ease-in-out infinite;
+animation: floatSide 4s ease-in-out infinite;
 }
 
-/* glow */
-.side-box:hover {
-box-shadow: 0 0 25px rgba(255,77,109,0.8);
+@keyframes floatSide {
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
 }
 
-.left-box { left: 10px; }
-.right-box { right: 10px; }
+.left-box { left:10px; }
+.right-box { right:10px; }
 
-/* mobile */
 @media(max-width:768px){
 .gallery{grid-template-columns:repeat(2,1fr);}
 .side-box{display:none;}
@@ -141,7 +123,6 @@ box-shadow: 0 0 25px rgba(255,77,109,0.8);
 
 <body>
 
-<!-- 🎁 INTRO -->
 <div id="intro">
 <h2>Tap to open your birthday surprise 🎁</h2>
 <button id="openBtn">Open 💖</button>
@@ -151,16 +132,11 @@ box-shadow: 0 0 25px rgba(255,77,109,0.8);
 <source src="song.mp3" type="audio/mp3">
 </audio>
 
-<!-- 💗 SIDE TEXT -->
-<div class="side-box left-box">
-You’re my favorite person ever 💗
-</div>
-
-<div class="side-box right-box">
-Forever yours, always 💖
-</div>
+<div class="side-box left-box">You’re my favorite person 💗</div>
+<div class="side-box right-box">Forever yours 💖</div>
 
 <div class="container" id="mainContent">
+
 <h1>Happy Birthday Henna ❤️</h1>
 
 <div id="typing"></div>
@@ -172,8 +148,8 @@ Forever yours, always 💖
 </div>
 
 <button id="playBtn">Tap this 💌</button>
-
 <div id="secret">I love you more every day. — Ayan ❤️</div>
+
 </div>
 
 <script>
@@ -190,23 +166,23 @@ Im sorry for hurting you whenever i did and i promise ill makeup for everything
 Forever yours,
 Ayandu ❤️`;
 
-/* ✨ TYPEWRITER */
+/* typewriter FIXED */
 function typeWriter() {
 let i = 0;
 let el = document.getElementById("typing");
-el.innerHTML = "";
+el.textContent = "";
 
 function step() {
 if (i < message.length) {
-el.innerHTML += message.charAt(i);
+el.textContent += message.charAt(i);
 i++;
-setTimeout(step, 18);
+setTimeout(step, 15);
 }
 }
 step();
 }
 
-/* 🎁 OPEN */
+/* open */
 document.getElementById("openBtn").onclick = function() {
 document.getElementById("intro").style.display = "none";
 document.getElementById("mainContent").style.display = "block";
@@ -218,12 +194,12 @@ music.play();
 typeWriter();
 };
 
-/* 💌 BUTTON */
+/* button */
 document.getElementById("playBtn").onclick = function() {
 document.getElementById("secret").style.display = "block";
 };
 
-/* 💖 FLOATING HEARTS */
+/* hearts */
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.innerHTML="💖";
