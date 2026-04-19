@@ -5,7 +5,6 @@
 <title>Happy Birthday Henna ❤️</title>
 
 <style>
-
 body {
 margin: 0;
 font-family: 'Segoe UI', sans-serif;
@@ -36,30 +35,24 @@ max-width: 850px;
 margin: 60px auto;
 padding: 25px;
 text-align: center;
-
 background: rgba(255,255,255,0.25);
 backdrop-filter: blur(10px);
 border-radius: 25px;
 box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
-/* title */
 h1 {
 font-size: 42px;
 color: #ff3d6e;
-margin-bottom: 10px;
 }
 
-/* letter */
 .note {
 font-size: 18px;
 line-height: 1.8;
-padding: 10px 15px;
-color: #222;
 white-space: pre-line;
 }
 
-/* photo grid */
+/* gallery */
 .gallery {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
@@ -71,11 +64,6 @@ margin-top: 20px;
 width: 100%;
 border-radius: 18px;
 box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-transition: transform 0.3s;
-}
-
-.gallery img:hover {
-transform: scale(1.05);
 }
 
 /* button */
@@ -90,7 +78,6 @@ font-size: 16px;
 cursor: pointer;
 }
 
-/* secret text */
 #secret {
 display: none;
 font-size: 20px;
@@ -98,40 +85,18 @@ margin-top: 15px;
 color: #ff2e63;
 }
 
-/* MOBILE RESPONSIVE */
+/* mobile */
 @media (max-width: 768px) {
-
-.container {
-margin: 25px 15px;
-padding: 20px;
-}
-
-h1 {
-font-size: 30px;
-}
-
-.note {
-font-size: 16px;
-}
-
 .gallery {
 grid-template-columns: repeat(2, 1fr);
 }
-
 }
 
 @media (max-width: 480px) {
-
 .gallery {
 grid-template-columns: 1fr;
 }
-
-h1 {
-font-size: 26px;
 }
-
-}
-
 </style>
 </head>
 
@@ -161,6 +126,7 @@ font-size: 26px;
 
 <script>
 
+window.onload = function() {
 
 const message = `MY HZU,
 
@@ -172,7 +138,6 @@ Im sorry for hurting you whenever i did and i promise ill makeup for everything
 
 Forever yours,
 Ayandu ❤️`;
-
 
 let i = 0;
 
@@ -186,9 +151,9 @@ setTimeout(typeWriter, 35);
 
 typeWriter();
 
-function showMessage() {
+window.showMessage = function() {
 document.getElementById("secret").style.display = "block";
-}
+};
 
 function createHeart() {
 const heart = document.createElement("div");
@@ -202,6 +167,8 @@ setTimeout(() => heart.remove(), 6000);
 }
 
 setInterval(createHeart, 400);
+
+};
 
 </script>
 
