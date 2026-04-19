@@ -11,14 +11,8 @@ font-family:'Segoe UI',sans-serif;
 background: linear-gradient(135deg,#ffdde1,#ee9ca7,#ffd1dc);
 overflow-x:hidden;
 
-/* FIXED CURSOR */
-cursor: url('heart.png') 16 16, auto;
-}
-
-/* 🌙 DARK MODE */
-.dark {
-background: linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);
-color:white;
+/* ✅ CURSOR FIX (.cur) */
+cursor: url('cursor.cur') 16 16, auto;
 }
 
 /* intro */
@@ -48,19 +42,16 @@ display:none;
 
 h1 { color:#ff3d6e; }
 
+/* ✅ TEXT FIX */
 #typing {
 font-size:18px;
 line-height:1.8;
 white-space:pre-line;
-display:none;
+word-wrap:break-word;
+overflow-wrap:break-word;
 }
 
-/* 💌 letter button */
-#letterBtn {
-margin-top:20px;
-}
-
-/* gallery POLAROID */
+/* gallery */
 .gallery {
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -69,11 +60,7 @@ margin-top:20px;
 }
 .gallery img {
 width:100%;
-background:white;
-padding:8px;
-border-radius:10px;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-transform:rotate(calc(-3deg + 6deg * var(--i)));
+border-radius:15px;
 }
 
 /* buttons */
@@ -84,7 +71,7 @@ background:#ff4d6d;
 color:white;
 border-radius:25px;
 cursor:pointer;
-margin:5px;
+margin-top:10px;
 }
 
 /* hearts */
@@ -92,37 +79,6 @@ margin:5px;
 0%{transform:translateY(0);opacity:1;}
 100%{transform:translateY(-110vh);opacity:0;}
 }
-
-/* mini texts */
-.mini {
-position:fixed;
-font-size:12px;
-color:#ff4d6d;
-opacity:0.6;
-animation: floatUp 6s linear;
-pointer-events:none;
-}
-
-/* popup */
-#popup {
-position:fixed;
-top:50%;left:50%;
-transform:translate(-50%,-50%);
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 10px 40px rgba(0,0,0,0.3);
-display:none;
-z-index:1000;
-}
-
-/* toggle */
-#toggle {
-position:fixed;
-top:10px;
-right:10px;
-}
-
 </style>
 </head>
 
@@ -137,8 +93,6 @@ right:10px;
 <source src="song.mp3" type="audio/mp3">
 </audio>
 
-<button id="toggle">🌙</button>
-
 <div class="container" id="mainContent">
 
 <h1>Happy Birthday Henna ❤️</h1>
@@ -148,31 +102,31 @@ right:10px;
 <div id="typing"></div>
 
 <div class="gallery">
-<img src="photo1.jpeg" style="--i:1">
-<img src="photo2.jpeg" style="--i:2">
-<img src="photo3.jpeg" style="--i:3">
+<img src="photo1.jpeg">
+<img src="photo2.jpeg">
+<img src="photo3.jpeg">
 </div>
 
-<div>
-<button id="playMusic">▶️</button>
-<button id="pauseMusic">⏸️</button>
-</div>
+<button id="playBtn">Tap this 💌</button>
+<div id="secret" style="display:none;">I WILL ALWAYS BE URS ❤️</div>
 
 </div>
-
-<div id="popup">I WILL ALWAYS BE URS ❤️</div>
 
 <script>
 window.onload=function(){
 
 const message = `MY HZU,
 
-I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life...
+I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life, everything about you feels so unreal that sometimes i question that even if ur real or not, your love makes me feel the emotions i never knew existed, ik we both are very short tempered have flaws but the way we always try n make it up n all is obv that we are meant to be together, I promise ill be the best bf now and will act just as how you like, will never give u a chance to complain and be bad at me bs daikho aap ab
+
+I Love you and always will in this life and others as well, if i could get chance to relive life i'd want you to be my gf in every. There is something about you that makes life livable, enjoyable, happy and most importantly makes life look different. I never knew someone could have this much impact on me but for 2 years we've met everything is just better man
+
+Im sorry for hurting you whenever i did and i promise ill makeup for everything 
 
 Forever yours,
 Ayandu ❤️`;
 
-/* typewriter */
+/* ✅ TYPEWRITER FIX */
 function typeWriter(){
 let i=0;
 let el=document.getElementById("typing");
@@ -181,9 +135,9 @@ el.style.display="block";
 
 function step(){
 if(i<message.length){
-el.textContent+=message[i];
+el.textContent += message.charAt(i);
 i++;
-setTimeout(step,15);
+setTimeout(step,12);
 }
 }
 step();
@@ -193,6 +147,7 @@ step();
 openBtn.onclick=function(){
 intro.style.display="none";
 mainContent.style.display="block";
+
 bgmusic.volume=0.2;
 bgmusic.play();
 };
@@ -202,46 +157,23 @@ letterBtn.onclick=function(){
 typeWriter();
 };
 
-/* music */
-playMusic.onclick=()=>bgmusic.play();
-pauseMusic.onclick=()=>bgmusic.pause();
-
-/* toggle */
-toggle.onclick=function(){
-document.body.classList.toggle("dark");
+/* second button */
+playBtn.onclick=function(){
+document.getElementById("secret").style.display="block";
 };
 
-/* floating mini texts */
+/* hearts */
 setInterval(()=>{
-let t=document.createElement("div");
-t.className="mini";
-t.innerText=["my girl 💗","forever us","I love you"][Math.floor(Math.random()*3)];
-t.style.left=Math.random()*100+"vw";
-t.style.bottom="-20px";
-document.body.appendChild(t);
-setTimeout(()=>t.remove(),6000);
-},1200);
-
-/* heart burst click */
-document.addEventListener("click", e=>{
-for(let i=0;i<6;i++){
 let h=document.createElement("div");
 h.innerHTML="💖";
 h.style.position="fixed";
-h.style.left=e.clientX+"px";
-h.style.top=e.clientY+"px";
-h.style.fontSize="14px";
-h.style.opacity=0.8;
-h.style.animation="floatUp 1s linear";
+h.style.left=Math.random()*100+"vw";
+h.style.bottom="-20px";
+h.style.fontSize="20px";
+h.style.animation="floatUp 6s linear";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),1000);
-}
-});
-
-/* popup */
-setTimeout(()=>{
-document.getElementById("popup").style.display="block";
-},8000);
+setTimeout(()=>h.remove(),6000);
+},400);
 
 };
 </script>
