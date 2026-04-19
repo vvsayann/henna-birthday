@@ -9,88 +9,49 @@ body {
 margin: 0;
 font-family: 'Segoe UI', sans-serif;
 background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffd1dc);
-background-attachment: fixed;
 overflow-x: hidden;
-color: #333;
-}
-
-.heart {
-position: fixed;
-color: #ff4d6d;
-animation: floatUp 6s linear infinite;
-z-index: 0;
-}
-
-@keyframes floatUp {
-0% {transform: translateY(100vh); opacity: 1;}
-100% {transform: translateY(-10vh); opacity: 0;}
 }
 
 .container {
-position: relative;
-z-index: 1;
 max-width: 850px;
 margin: 60px auto;
 padding: 25px;
 text-align: center;
-background: rgba(255,255,255,0.25);
-backdrop-filter: blur(10px);
+background: rgba(255,255,255,0.3);
 border-radius: 25px;
-box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
-h1 {
-font-size: 42px;
-color: #ff3d6e;
-}
-
-.note {
-font-size: 18px;
-line-height: 1.8;
-white-space: pre-line;
-}
+h1 { color:#ff3d6e; }
 
 .gallery {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-margin-top: 20px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:20px;
 }
 
 .gallery img {
-width: 100%;
-border-radius: 18px;
-box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+width:100%;
+border-radius:15px;
 }
 
 button {
-margin-top: 20px;
-padding: 12px 25px;
-border: none;
-background: #ff4d6d;
-color: white;
-border-radius: 25px;
-font-size: 16px;
-cursor: pointer;
+margin-top:20px;
+padding:12px 25px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:25px;
+cursor:pointer;
 }
 
-#secret {
-display: none;
-font-size: 20px;
-margin-top: 15px;
-color: #ff2e63;
-}
+#secret { display:none; margin-top:15px; }
 
-@media (max-width: 768px) {
-.gallery {
-grid-template-columns: repeat(2, 1fr);
+@media(max-width:768px){
+.gallery{grid-template-columns:repeat(2,1fr);}
 }
-}
-
-@media (max-width: 480px) {
-.gallery {
-grid-template-columns: 1fr;
-}
+@media(max-width:480px){
+.gallery{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -102,10 +63,9 @@ grid-template-columns: 1fr;
 </audio>
 
 <div class="container">
-
 <h1>Happy Birthday Henna ❤️</h1>
 
-<div class="note" id="typing"></div>
+<div id="typing"></div>
 
 <div class="gallery">
 <img src="photo1.jpeg">
@@ -113,63 +73,50 @@ grid-template-columns: 1fr;
 <img src="photo3.jpeg">
 </div>
 
-<!-- ✅ UPDATED BUTTON -->
-<button onclick="playMusic(); showMessage()">Tap this 💌</button>
+<button id="playBtn">Tap this 💌</button>
 
 <div id="secret">I love you more every day. — Ayan ❤️</div>
-
 </div>
 
 <script>
 
-window.onload = function() {
-
 const message = `MY HZU,
 
-I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life, everything about you feels so unreal that sometimes i question that even if ur real or not, your love makes me feel the emotions i never knew existed, ik we both are very short tempered have flaws but the way we always try n make it up n all is obv that we are meant to be together, I promise ill be the best bf now and will act just as how you like, will never give u a chance to complain and be bad at me bs daikho aap ab
-
-I Love you and always will in this life and others as well, if i could get chance to relive life i'd want you to be my gf in every. There is something about you that makes life livable, enjoyable, happy and most importantly makes life look different. I never knew someone could have this much impact on me but for 2 years we've met everything is just better man
-
-Im sorry for hurting you whenever i did and i promise ill makeup for everything 
-
+I cant imagine spending a single day without you...
 Forever yours,
 Ayandu ❤️`;
 
 let i = 0;
 
-function typeWriter() {
-if (i < message.length) {
+function typeWriter(){
+if(i < message.length){
 document.getElementById("typing").innerHTML += message.charAt(i);
 i++;
-setTimeout(typeWriter, 35);
+setTimeout(typeWriter,35);
 }
 }
 
 typeWriter();
 
-/* ✅ FIXED FUNCTIONS */
-window.showMessage = function() {
+/* ✅ FINAL BUTTON FIX */
+document.getElementById("playBtn").addEventListener("click", function(){
+let music = document.getElementById("bgmusic");
+music.play();
 document.getElementById("secret").style.display = "block";
-};
+});
 
-window.playMusic = function() {
-document.getElementById("bgmusic").play();
-};
-
-function createHeart() {
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML = "❤️";
-heart.style.left = Math.random() * 100 + "vw";
-heart.style.fontSize = Math.random() * 20 + 15 + "px";
+/* hearts */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.style.position="fixed";
+heart.style.left=Math.random()*100+"vw";
+heart.style.bottom="0";
+heart.style.fontSize="20px";
 document.body.appendChild(heart);
 
-setTimeout(() => heart.remove(), 6000);
-}
-
-setInterval(createHeart, 400);
-
-};
+setTimeout(()=>heart.remove(),4000);
+},500);
 
 </script>
 
