@@ -10,10 +10,9 @@ margin: 0;
 font-family: 'Segoe UI', sans-serif;
 background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffd1dc);
 overflow-x: hidden;
-cursor: url('heart.png'), auto;
 }
 
-/* intro */
+/* 🎁 INTRO */
 #intro {
 position: fixed;
 top:0; left:0;
@@ -35,15 +34,16 @@ background:#ff4d6d;
 color:white;
 font-size:18px;
 cursor:pointer;
+margin-top:15px;
 }
 
-/* hearts */
+/* 💖 hearts */
 @keyframes floatUp {
 0% {transform:translateY(0); opacity:1;}
 100% {transform:translateY(-110vh); opacity:0;}
 }
 
-/* main */
+/* MAIN */
 .container {
 max-width:850px;
 margin:60px auto;
@@ -70,12 +70,13 @@ grid-template-columns:repeat(3,1fr);
 gap:10px;
 margin-top:20px;
 }
+
 .gallery img {
 width:100%;
 border-radius:15px;
 }
 
-/* button */
+/* buttons */
 button {
 margin-top:20px;
 padding:12px 25px;
@@ -86,31 +87,30 @@ border-radius:25px;
 cursor:pointer;
 }
 
-#secret { display:none; }
+#secret {
+display:none;
+margin-top:15px;
+}
 
-/* side boxes */
+/* 💗 SIDE BOXES */
 .side-box {
 position: fixed;
 top: 30%;
-width: 170px;
+width: 160px;
 padding: 15px;
 background: rgba(255,255,255,0.6);
 border-radius: 20px;
 backdrop-filter: blur(10px);
-box-shadow: 0 5px 25px rgba(255,77,109,0.3);
+box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+font-size: 14px;
 color: #ff3d6e;
-animation: floatSide 4s ease-in-out infinite;
+z-index: 2;
 }
 
-@keyframes floatSide {
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
-}
+.left-box { left: 10px; }
+.right-box { right: 10px; }
 
-.left-box { left:10px; }
-.right-box { right:10px; }
-
+/* mobile */
 @media(max-width:768px){
 .gallery{grid-template-columns:repeat(2,1fr);}
 .side-box{display:none;}
@@ -123,6 +123,7 @@ animation: floatSide 4s ease-in-out infinite;
 
 <body>
 
+<!-- 🎁 INTRO -->
 <div id="intro">
 <h2>Tap to open your birthday surprise 🎁</h2>
 <button id="openBtn">Open 💖</button>
@@ -132,11 +133,16 @@ animation: floatSide 4s ease-in-out infinite;
 <source src="song.mp3" type="audio/mp3">
 </audio>
 
-<div class="side-box left-box">You’re my favorite person 💗</div>
-<div class="side-box right-box">Forever yours 💖</div>
+<!-- 💗 SIDE TEXT -->
+<div class="side-box left-box">
+You’re my favorite person ever 💗
+</div>
+
+<div class="side-box right-box">
+Forever yours, always 💖
+</div>
 
 <div class="container" id="mainContent">
-
 <h1>Happy Birthday Henna ❤️</h1>
 
 <div id="typing"></div>
@@ -148,8 +154,8 @@ animation: floatSide 4s ease-in-out infinite;
 </div>
 
 <button id="playBtn">Tap this 💌</button>
-<div id="secret">I love you more every day. — Ayan ❤️</div>
 
+<div id="secret">I love you more every day. — Ayan ❤️</div>
 </div>
 
 <script>
@@ -157,32 +163,27 @@ window.onload = function() {
 
 const message = `MY HZU,
 
-I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life, everything about you feels so unreal that sometimes i question that even if ur real or not, your love makes me feel the emotions i never knew existed, ik we both are very short tempered have flaws but the way we always try n make it up n all is obv that we are meant to be together, I promise ill be the best bf now and will act just as how you like, will never give u a chance to complain and be bad at me bs daikho aap ab
-
-I Love you and always will in this life and others as well, if i could get chance to relive life i'd want you to be my gf in every. There is something about you that makes life livable, enjoyable, happy and most importantly makes life look different. I never knew someone could have this much impact on me but for 2 years we've met everything is just better man
-
-Im sorry for hurting you whenever i did and i promise ill makeup for everything 
+I cant imagine spending a single day without you, ik we have our ups and downs but ever since we've met i love life...
 
 Forever yours,
 Ayandu ❤️`;
 
-/* typewriter FIXED */
 function typeWriter() {
 let i = 0;
 let el = document.getElementById("typing");
-el.textContent = "";
+el.innerHTML = "";
 
 function step() {
 if (i < message.length) {
-el.textContent += message.charAt(i);
+el.innerHTML += message.charAt(i);
 i++;
-setTimeout(step, 15);
+setTimeout(step, 18);
 }
 }
 step();
 }
 
-/* open */
+/* 🎁 open */
 document.getElementById("openBtn").onclick = function() {
 document.getElementById("intro").style.display = "none";
 document.getElementById("mainContent").style.display = "block";
@@ -194,12 +195,12 @@ music.play();
 typeWriter();
 };
 
-/* button */
+/* 💌 button */
 document.getElementById("playBtn").onclick = function() {
 document.getElementById("secret").style.display = "block";
 };
 
-/* hearts */
+/* 💖 hearts */
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.innerHTML="💖";
