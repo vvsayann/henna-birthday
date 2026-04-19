@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Henna ❤️</title>
 
+<style>
+
+body {
+margin: 0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffd1dc);
+background-attachment: fixed;
+overflow-x: hidden;
+color: #333;
+}
+
+/* floating hearts */
+.heart {
+position: fixed;
+color: #ff4d6d;
+animation: floatUp 6s linear infinite;
+z-index: 0;
+}
+
+@keyframes floatUp {
+0% {transform: translateY(100vh); opacity: 1;}
+100% {transform: translateY(-10vh); opacity: 0;}
+}
+
+/* main card */
+.container {
+position: relative;
+z-index: 1;
+max-width: 850px;
+margin: 60px auto;
+padding: 25px;
+text-align: center;
+
+background: rgba(255,255,255,0.25);
+backdrop-filter: blur(10px);
+border-radius: 25px;
+box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+/* title */
+h1 {
+font-size: 42px;
+color: #ff3d6e;
+margin-bottom: 10px;
+}
+
+/* letter */
+.note {
+font-size: 18px;
+line-height: 1.8;
+padding: 10px 15px;
+color: #222;
+white-space: pre-line;
+}
+
+/* photo grid */
+.gallery {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+margin-top: 20px;
+}
+
+.gallery img {
+width: 100%;
+border-radius: 18px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+transition: transform 0.3s;
+}
+
+.gallery img:hover {
+transform: scale(1.05);
+}
+
+/* button */
+button {
+margin-top: 20px;
+padding: 12px 25px;
+border: none;
+background: #ff4d6d;
+color: white;
+border-radius: 25px;
+font-size: 16px;
+cursor: pointer;
+}
+
+/* secret text */
+#secret {
+display: none;
+font-size: 20px;
+margin-top: 15px;
+color: #ff2e63;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+.container {
+margin: 25px 15px;
+padding: 20px;
+}
+
+h1 {
+font-size: 30px;
+}
+
+.note {
+font-size: 16px;
+}
+
+.gallery {
+grid-template-columns: repeat(2, 1fr);
+}
+
+}
+
+@media (max-width: 480px) {
+
+.gallery {
+grid-template-columns: 1fr;
+}
+
+h1 {
+font-size: 26px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="song.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+
+<h1>Happy Birthday Henna ❤️</h1>
+
+<div class="note" id="typing"></div>
+
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+</div>
+
+<button onclick="showMessage()">Tap this 💌</button>
+
+<div id="secret">I love you more every day. — Ayan ❤️</div>
+
+</div>
+
+<script>
+
+const message = `My dearest Henna,
+
+Happy Birthday ❤️
+
+You make everything in my life softer and more meaningful.
+I don’t think I ever told you enough how special you are to me.
+
+Every smile of yours feels like home.
+Every moment with you feels like peace.
+
+If I had one wish, it would always be you — in every lifetime.
+
+Forever yours,
+Ayan ❤️`;
+
+let i = 0;
+
+function typeWriter() {
+if (i < message.length) {
+document.getElementById("typing").innerHTML += message.charAt(i);
+i++;
+setTimeout(typeWriter, 35);
+}
+}
+
+typeWriter();
+
+function showMessage() {
+document.getElementById("secret").style.display = "block";
+}
+
+function createHeart() {
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML = "❤️";
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.fontSize = Math.random() * 20 + 15 + "px";
+document.body.appendChild(heart);
+
+setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 400);
+
+</script>
+
+</body>
+</html>
